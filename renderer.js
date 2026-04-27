@@ -266,7 +266,7 @@ export class Renderer {
       ctx.globalAlpha = flicker ? 1.0 : 0.3;
     }
     if (ghostyImage && ghostyImage.complete && ghostyImage.naturalWidth > 0) {
-      ctx.drawImage(ghostyImage, ghosty.x, ghosty.y);
+      ctx.drawImage(ghostyImage, ghosty.x, ghosty.y, ghosty.width, ghosty.height);
     } else {
       // Fallback: white rectangle
       ctx.fillStyle = '#ffffff';

@@ -9,11 +9,11 @@ export class PhysicsSystem {
     this._canvasHeight = canvasHeight;
     this._invincibilityRemaining = 0;
     this._ghosty = {
-      x: 80,
-      y: canvasHeight / 2 - 20,
+      x: 160,
+      y: canvasHeight / 2 - 30,
       vy: 0,
-      width: 40,
-      height: 40,
+      width: 60,
+      height: 60,
     };
   }
 
@@ -40,8 +40,8 @@ export class PhysicsSystem {
   }
 
   reset() {
-    this._ghosty.x = 80;
-    this._ghosty.y = this._canvasHeight / 2 - 20;
+    this._ghosty.x = 160;
+    this._ghosty.y = this._canvasHeight / 2 - 30;
     this._ghosty.vy = 0;
     this._invincibilityRemaining = 0;
   }

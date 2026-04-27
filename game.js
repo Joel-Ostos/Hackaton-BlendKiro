@@ -22,8 +22,8 @@ import {
 } from './collision.js';
 
 const SCORE_BAR_HEIGHT = 60;
-const CANVAS_WIDTH = 480;
-const CANVAS_HEIGHT = 640;
+const CANVAS_WIDTH = 1280;
+const CANVAS_HEIGHT = 720;
 const SCORE_POPUP_LIFETIME = 800; // ms
 
 // ─── Subsystem instances ────────────────────────────────────────────────────
@@ -42,8 +42,8 @@ const renderer = new Renderer(canvas, ctx);
 
 // Load Ghosty sprite
 const ghostyImage = new Image();
-ghostyImage.src = 'assets/ghosty.png';
 ghostyImage.onerror = () => console.warn('game.js: failed to load assets/ghosty.png');
+ghostyImage.src = 'assets/ghosty.png';
 
 // ─── Game state ─────────────────────────────────────────────────────────────
 
