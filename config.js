@@ -1,0 +1,21 @@
+export const GRAVITY = 1800;               // px/s²
+export const FLAP_VELOCITY = -520;         // px/s (negative = upward)
+export const TERMINAL_VELOCITY = 700;      // px/s (max downward)
+export const PIPE_SPEED_INITIAL = 200;     // px/s
+export const PIPE_SPEED_INCREMENT = 20;    // px/s per milestone
+export const PIPE_SPEED_MAX = 400;         // px/s
+export const PIPE_SPAWN_INTERVAL = 1.8;    // seconds
+export const GAP_SIZE = 160;               // px
+export const GAP_VERTICAL_MIN = 120;       // px from top (gap center min)
+export const GAP_VERTICAL_MAX = 380;       // px from top (gap center max)
+export const CLOUD_SPEED = 40;             // px/s
+export const CLOUD_COUNT = 5;
+export const LIVES_INITIAL = 3;
+export const INVINCIBILITY_DURATION = 2000; // ms
+export const COIN_SCORE_VALUE = 5;
+export const PIPE_SCORE_VALUE = 1;
+export const SPEED_MILESTONE = 5;          // score points per speed increment
+export const PARTICLE_COUNT = 3;           // particles emitted per frame
+export const PARTICLE_LIFETIME = 400;      // ms
+export const SCREEN_SHAKE_DURATION = 300;  // ms
+export const SCREEN_SHAKE_INTENSITY = 8;   // px offset

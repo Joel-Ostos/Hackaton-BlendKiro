@@ -2,6 +2,7 @@
 
 ## Introduction
 
+<<<<<<< HEAD
 Flappy Kiro is a retro-styled endless side-scrolling browser game inspired by Flappy Bird. The player controls a ghost character ("Ghosty") that navigates through gaps between vertical pipes using physics-based flight mechanics. The game features a hand-drawn aesthetic with provided visual assets, progressive difficulty, a lives system, collectible coins, and comprehensive audio/visual feedback. The game is implemented as an HTML5 Canvas application using vanilla JavaScript with no external dependencies.
 
 ## Glossary
@@ -291,3 +292,147 @@ Flappy Kiro is a retro-styled endless side-scrolling browser game inspired by Fl
 4. THE Game_Engine SHALL use efficient collision detection algorithms to minimize computation time
 5. WHEN the frame rate drops below 60 frames per second, THE Game_Engine SHALL continue gameplay without crashing
 
+=======
+Flappy Kiro is a retro-styled, endless side-scrolling browser game inspired by Flappy Bird. The player controls a ghost character ("Ghosty") navigating through gaps between pairs of vertical pipes. The game features a hand-drawn aesthetic with a sky-blue background, floating clouds, green pipes, and a bottom score bar. All visual assets — including the background image and the complete sprite/color palette — have been provided by the development team and must be used as-is without substitution. The game uses HTML5 Canvas and vanilla JavaScript with no external dependencies, and includes a comprehensive physics system, progressive difficulty, full game state management, and audio/visual feedback for an engaging player experience. All tuneable game parameters are centralized in a single global configuration file to allow rapid iteration without touching game logic.
+
+## Glossary
+
+- **Game_Canvas**: The HTML5 Canvas element that renders all game visuals
+- **Ghosty**: The player-controlled ghost character sprite loaded from `assets/ghosty.png`
+- **Pipe_Pair**: A pair of vertically aligned pipes (top and bottom) with a gap between them that Ghosty must fly through
+- **Pipe_Cap**: The darker cap at the open end of each pipe
+- **Gap**: The vertical opening between a top pipe and a bottom pipe in a Pipe_Pair
+- **Score_Bar**: The dark horizontal bar at the bottom of the screen displaying the current score and high score
+- **Game_Loop**: The main `requestAnimationFrame` loop that updates and renders the game each frame
+- **Gravity**: The constant downward acceleration applied to Ghosty each frame
+- **Flap**: The upward velocity impulse applied to Ghosty when the player presses Space or taps the screen
+- **Terminal_Velocity**: The maximum downward speed Ghosty can reach, preventing infinite acceleration
+- **Momentum**: The conservation of velocity between frames, producing smooth arc-like movement
+- **Cloud**: A decorative element that scrolls across the background at a slower speed than pipes
+- **Collision_Detector**: The subsystem responsible for detecting overlap between Ghosty and pipes or screen boundaries
+- **Hitbox**: The precise bounding area used for collision calculations on Ghosty and pipes
+- **Invincibility_Frames**: A brief period after a collision during which Ghosty cannot take further damage
+- **Audio_Manager**: The subsystem responsible for playing sound effects and background music
+- **High_Score**: The highest score achieved across sessions, persisted in browser localStorage
+- **Particle_Trail**: A visual effect of small particles emitted behind Ghosty during flight
+- **Screen_Shake**: A brief camera-shake effect triggered upon collision
+- **Progressive_Speed**: The mechanic by which pipe movement speed increases incrementally as the player's score grows
+- **Lives**: The number of collisions a player can survive before reaching the game over screen
+- **Coin**: A collectible item that appears along the flight path and awards points upon collection
+- **Config_File**: The centralized JavaScript configuration file (config.js) that exports all tuneable game constants
+
+## Requirements
+
+### Requirement 1: Provided Assets
+
+**User Story:** As a developer, I want all visual assets to come from the supplied files, so that the game has a consistent, approved look and feel.
+
+#### Acceptance Criteria
+
+1. THE game SHALL draw the background inspired by assets/background.png (tech/circuit-board ground, city skyline, day-to-night gradient sky) — do NOT use the image file directly; recreate it procedurally on canvas.
+2. THE game SHALL use exclusively the sprites, colors, and graphical elements from assets/assets_palette.png. No external icon libraries, placeholder graphics, or colors outside the provided palette SHALL be introduced.
+3. THE game SHALL load Ghosty's sprite from assets/ghosty.png as supplied, without modification to its dimensions or color profile.
+
+### Requirement 2: Global Configuration File
+
+**User Story:** As a developer, I want all tuneable game parameters in one place, so that I can iterate on game feel without touching game logic.
+
+#### Acceptance Criteria
+
+1. THE project SHALL include a single Config_File at config.js that exports all tuneable game parameters as named constants. No magic numbers related to gameplay SHALL appear outside of this file.
+2. THE Config_File SHALL define and export at minimum: GRAVITY, FLAP_VELOCITY, TERMINAL_VELOCITY, PIPE_SPEED_INITIAL, PIPE_SPEED_INCREMENT, PIPE_SPEED_MAX, PIPE_SPAWN_INTERVAL, GAP_SIZE, GAP_VERTICAL_MIN, GAP_VERTICAL_MAX, CLOUD_SPEED, CLOUD_COUNT, LIVES_INITIAL, INVINCIBILITY_DURATION, COIN_SCORE_VALUE, PIPE_SCORE_VALUE, SPEED_MILESTONE, PARTICLE_COUNT, PARTICLE_LIFETIME, SCREEN_SHAKE_DURATION, SCREEN_SHAKE_INTENSITY.
+3. THE game logic SHALL import and consume all gameplay constants exclusively from the Config_File.
+
+### Requirement 3: Game Canvas & Background
+
+**User Story:** As a player, I want a visually rich game world, so that the game feels immersive and polished.
+
+#### Acceptance Criteria
+
+1. THE Game_Canvas SHALL render a background with a subtle hand-drawn or sketchy texture matching the supplied palette (tech/circuit-board ground, city skyline, sky gradient).
+2. THE Game_Canvas SHALL render multiple Cloud elements at varying vertical positions that scroll horizontally from right to left at CLOUD_SPEED, creating a parallax effect.
+3. THE Game_Canvas SHALL render Ghosty using the sprite loaded from assets/ghosty.png.
+4. THE Score_Bar SHALL be rendered as a dark-colored horizontal bar anchored to the bottom of the Game_Canvas with white text displaying the current score, the remaining Lives, and the High_Score.
+
+### Requirement 4: Physics System
+
+**User Story:** As a player, I want Ghosty to move with realistic momentum and gravity, so that the game feels responsive and satisfying to control.
+
+#### Acceptance Criteria
+
+1. THE Game_Loop SHALL apply GRAVITY to Ghosty's vertical velocity every frame.
+2. WHEN the player presses Spacebar or taps the screen, THE system SHALL apply a Flap impulse setting Ghosty's vertical velocity to FLAP_VELOCITY.
+3. THE physics system SHALL enforce TERMINAL_VELOCITY as the maximum downward speed for Ghosty.
+4. THE physics system SHALL preserve Momentum between frames, producing smooth arc-like motion.
+5. THE physics system SHALL apply smooth movement interpolation across varying frame rates.
+
+### Requirement 5: Obstacle Generation
+
+**User Story:** As a player, I want a continuous stream of pipe obstacles at increasing difficulty, so that the game remains challenging as I improve.
+
+#### Acceptance Criteria
+
+1. THE system SHALL spawn Pipe_Pairs at a consistent horizontal interval defined by PIPE_SPAWN_INTERVAL.
+2. EACH Pipe_Pair SHALL have a Gap of height GAP_SIZE, with its vertical center randomized between GAP_VERTICAL_MIN and GAP_VERTICAL_MAX.
+3. THE system SHALL move all Pipe_Pairs from right to left at the current pipe speed each frame.
+4. THE system SHALL increase pipe speed by PIPE_SPEED_INCREMENT every time the player's score reaches a multiple of SPEED_MILESTONE, up to PIPE_SPEED_MAX.
+5. EACH Pipe_Pair SHALL include a Pipe_Cap rendered at the open end of both pipes using colors from the provided palette.
+
+### Requirement 6: Coins
+
+**User Story:** As a player, I want to collect coins for bonus points, so that I have an additional challenge beyond just surviving.
+
+#### Acceptance Criteria
+
+1. THE system SHALL spawn Coin elements along the flight path at randomized positions within reachable areas of each Gap.
+2. WHEN Ghosty's Hitbox overlaps a Coin, THE system SHALL remove the Coin and add COIN_SCORE_VALUE to the score.
+3. THE Audio_Manager SHALL play a distinct coin collection sound effect upon each successful Coin pickup.
+
+### Requirement 7: Lives System
+
+**User Story:** As a player, I want multiple lives before game over, so that a single mistake doesn't immediately end my run.
+
+#### Acceptance Criteria
+
+1. THE game SHALL grant the player LIVES_INITIAL Lives at the start of each session, displayed in the Score_Bar.
+2. UPON a collision, THE system SHALL deduct one Life and trigger Invincibility_Frames for INVINCIBILITY_DURATION milliseconds.
+3. WHEN Lives reach zero, THE game SHALL transition to the game over screen.
+
+### Requirement 8: Collision Detection
+
+**User Story:** As a player, I want fair and precise collision detection, so that I feel in control of the outcome.
+
+#### Acceptance Criteria
+
+1. THE Collision_Detector SHALL use precise Hitbox definitions for Ghosty and each Pipe_Pair.
+2. THE Collision_Detector SHALL detect Ghosty overlapping a pipe wall and trigger a collision response.
+3. THE Collision_Detector SHALL detect Ghosty reaching the top or bottom canvas boundary and trigger a collision response.
+4. UPON collision, THE system SHALL trigger a Screen_Shake effect lasting SCREEN_SHAKE_DURATION at SCREEN_SHAKE_INTENSITY pixel offset.
+5. UPON collision, THE system SHALL grant Ghosty Invincibility_Frames for INVINCIBILITY_DURATION milliseconds.
+
+### Requirement 9: Game State Management
+
+**User Story:** As a player, I want clear game states (menu, playing, paused, game over), so that I can navigate the game experience smoothly.
+
+#### Acceptance Criteria
+
+1. THE game SHALL display a main menu screen on load, showing the game title, High_Score, and a prompt to start.
+2. THE game SHALL transition to active gameplay on first player input from the main menu.
+3. THE gameplay state SHALL increment score by PIPE_SCORE_VALUE each time Ghosty passes through a Gap.
+4. THE game SHALL support pause functionality, allowing the player to freeze and resume the Game_Loop without losing state.
+5. UPON all Lives depleted, THE game SHALL transition to a game over screen with final score, High_Score, and restart option.
+6. THE game SHALL persist High_Score using browser localStorage.
+
+### Requirement 10: Audio & Visual Feedback
+
+**User Story:** As a player, I want rich audio and visual feedback, so that every action feels impactful and rewarding.
+
+#### Acceptance Criteria
+
+1. THE Audio_Manager SHALL play a flap sound effect on each Flap action.
+2. THE Audio_Manager SHALL play a score sound effect each time Ghosty passes through a Gap.
+3. THE Audio_Manager SHALL play a collision sound effect on collision.
+4. THE Audio_Manager SHALL play background music in a looping manner during active gameplay.
+5. THE system SHALL render a Particle_Trail behind Ghosty, emitting PARTICLE_COUNT particles per frame that fade out after PARTICLE_LIFETIME milliseconds.
+6. THE system SHALL display a brief "+N" score indicator animation near the scoring event location each time the player earns points.
+>>>>>>> ad3a836 (Tasks completed)
